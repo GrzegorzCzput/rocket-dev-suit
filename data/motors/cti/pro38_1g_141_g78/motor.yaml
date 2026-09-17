@@ -1,0 +1,11 @@
+schema_version: 1
+id: cti_pro38_1g_141_g78bs_15a
+name: CTI Pro38-1G 141 G78BS - 15A
+manufacturer: Cesaroni Technology Inc.
+thrust_curve_file: thrust.eng
+loaded_mass_kg: 0.197
+propellant_mass_kg: 0.069
+propellant_cg_station_m: 0.077
+propellant_radius_m: 0.016
+propellant_length_m: 0.100
+source_url: https://www.thrustcurve.org/simfiles/5f4294d20002e900000006ff/

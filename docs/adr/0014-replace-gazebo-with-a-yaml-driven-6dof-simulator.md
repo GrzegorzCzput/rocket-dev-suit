@@ -1,0 +1,5 @@
+# Replace Gazebo with a YAML-driven 6-DoF simulator
+
+Archive the Gazebo experiment and build a deterministic custom six-degree-of-freedom Flight Simulation inside `rocket_geometry`. Reuse the proven dynamics, controller, sensor, and plotting concepts from `sim_rocketpy`, while replacing its hard-coded vehicle parameters with versioned Rocket Definition and Simulation Scenario inputs. This favors transparent equations, repeatable control-loop timing, and rocket-specific validation over general-purpose rigid-body and contact simulation.
+
+The authoritative geometry and physics frame remains Body-FLU. A tested boundary adapter presents Body-FRD to conventional aerospace controllers and sensors. Geometry derives neutral Barrowman stability and a documented baseline drag build-up; Rocket-owned Aerodynamic Calibration supplies powered/coasting corrections or coefficient-table overrides. Fixed-step RK4 is retained for deterministic sampled control, subject to mandatory convergence tests. Trusted runs end when Mach reaches 0.7 or absolute angle of attack or sideslip exceeds 10 degrees.

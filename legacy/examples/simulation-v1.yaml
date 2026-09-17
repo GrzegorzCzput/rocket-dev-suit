@@ -1,0 +1,11 @@
+schema_version: 1
+simulation:
+  air_density_kg_m3: 1.225
+  wind_world_mps: [0.0, 0.0, 0.0]
+  initial_position_world_m: [0.0, 0.0, 1.0]
+  initial_rpy_world_rad: [0.0, 0.0, 0.0]
+  initial_linear_velocity_world_mps: [0.0, 0.0, 0.0]
+  initial_angular_velocity_world_radps: [0.0, 0.0, 0.0]
+  maximum_mach: 0.8
+  speed_of_sound_mps: 340.0
+  maximum_angle_of_attack_rad: 0.17453292519943295

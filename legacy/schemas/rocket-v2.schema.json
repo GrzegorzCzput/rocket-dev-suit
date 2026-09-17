@@ -1,0 +1,438 @@
+{
+  "$defs": {
+    "Actuation": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "enum": [
+            "fixed",
+            "all_moving",
+            "control_surface"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "span_start_fraction": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Span Start Fraction"
+        },
+        "hinge_fraction": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Hinge Fraction"
+        },
+        "minimum_deflection_rad": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minimum Deflection Rad"
+        },
+        "maximum_deflection_rad": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Maximum Deflection Rad"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "Actuation",
+      "type": "object"
+    },
+    "ActuatorDynamics": {
+      "additionalProperties": false,
+      "properties": {
+        "fin_set_id": {
+          "pattern": "^[a-z][a-z0-9_\\-]*$",
+          "title": "Fin Set Id",
+          "type": "string"
+        },
+        "maximum_rate_radps": {
+          "exclusiveMinimum": 0.0,
+          "title": "Maximum Rate Radps",
+          "type": "number"
+        }
+      },
+      "required": [
+        "fin_set_id",
+        "maximum_rate_radps"
+      ],
+      "title": "ActuatorDynamics",
+      "type": "object"
+    },
+    "AerodynamicCalibration": {
+      "additionalProperties": false,
+      "properties": {
+        "powered_drag_multiplier": {
+          "default": 1.0,
+          "exclusiveMinimum": 0.0,
+          "title": "Powered Drag Multiplier",
+          "type": "number"
+        },
+        "coast_drag_multiplier": {
+          "default": 1.0,
+          "exclusiveMinimum": 0.0,
+          "title": "Coast Drag Multiplier",
+          "type": "number"
+        },
+        "control_effectiveness_multiplier": {
+          "default": 1.0,
+          "exclusiveMinimum": 0.0,
+          "title": "Control Effectiveness Multiplier",
+          "type": "number"
+        }
+      },
+      "title": "AerodynamicCalibration",
+      "type": "object"
+    },
+    "Body": {
+      "additionalProperties": false,
+      "properties": {
+        "length_m": {
+          "exclusiveMinimum": 0.0,
+          "title": "Length M",
+          "type": "number"
+        },
+        "diameter_m": {
+          "exclusiveMinimum": 0.0,
+          "title": "Diameter M",
+          "type": "number"
+        },
+        "aerodynamics": {
+          "$ref": "#/$defs/ComponentAerodynamics"
+        }
+      },
+      "required": [
+        "length_m",
+        "diameter_m"
+      ],
+      "title": "Body",
+      "type": "object"
+    },
+    "ComponentAerodynamics": {
+      "additionalProperties": false,
+      "properties": {
+        "skin_friction_coefficient": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Skin Friction Coefficient",
+          "type": "number"
+        },
+        "pressure_drag_coefficient": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Pressure Drag Coefficient",
+          "type": "number"
+        }
+      },
+      "title": "ComponentAerodynamics",
+      "type": "object"
+    },
+    "DryMassProperties": {
+      "additionalProperties": false,
+      "properties": {
+        "mass_kg": {
+          "exclusiveMinimum": 0.0,
+          "title": "Mass Kg",
+          "type": "number"
+        },
+        "center_of_mass_station_m": {
+          "minimum": 0.0,
+          "title": "Center Of Mass Station M",
+          "type": "number"
+        },
+        "inertia_xx_kg_m2": {
+          "exclusiveMinimum": 0.0,
+          "title": "Inertia Xx Kg M2",
+          "type": "number"
+        },
+        "inertia_yy_kg_m2": {
+          "exclusiveMinimum": 0.0,
+          "title": "Inertia Yy Kg M2",
+          "type": "number"
+        },
+        "inertia_zz_kg_m2": {
+          "exclusiveMinimum": 0.0,
+          "title": "Inertia Zz Kg M2",
+          "type": "number"
+        }
+      },
+      "required": [
+        "mass_kg",
+        "center_of_mass_station_m",
+        "inertia_xx_kg_m2",
+        "inertia_yy_kg_m2",
+        "inertia_zz_kg_m2"
+      ],
+      "title": "DryMassProperties",
+      "type": "object"
+    },
+    "FinGeometry": {
+      "additionalProperties": false,
+      "properties": {
+        "root_chord_m": {
+          "exclusiveMinimum": 0.0,
+          "title": "Root Chord M",
+          "type": "number"
+        },
+        "tip_chord_m": {
+          "exclusiveMinimum": 0.0,
+          "title": "Tip Chord M",
+          "type": "number"
+        },
+        "span_m": {
+          "exclusiveMinimum": 0.0,
+          "title": "Span M",
+          "type": "number"
+        },
+        "sweep_m": {
+          "minimum": 0.0,
+          "title": "Sweep M",
+          "type": "number"
+        },
+        "thickness_m": {
+          "exclusiveMinimum": 0.0,
+          "title": "Thickness M",
+          "type": "number"
+        }
+      },
+      "required": [
+        "root_chord_m",
+        "tip_chord_m",
+        "span_m",
+        "sweep_m",
+        "thickness_m"
+      ],
+      "title": "FinGeometry",
+      "type": "object"
+    },
+    "FinSet": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-z][a-z0-9_\\-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "station_m": {
+          "minimum": 0.0,
+          "title": "Station M",
+          "type": "number"
+        },
+        "count": {
+          "enum": [
+            3,
+            4,
+            6
+          ],
+          "title": "Count",
+          "type": "integer"
+        },
+        "angular_offset_rad": {
+          "exclusiveMaximum": 6.283185307179586,
+          "minimum": 0.0,
+          "title": "Angular Offset Rad",
+          "type": "number"
+        },
+        "geometry": {
+          "$ref": "#/$defs/FinGeometry"
+        },
+        "actuation": {
+          "$ref": "#/$defs/Actuation"
+        },
+        "aerodynamics": {
+          "$ref": "#/$defs/ComponentAerodynamics"
+        },
+        "control_effectiveness": {
+          "default": 0.7,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Control Effectiveness",
+          "type": "number"
+        }
+      },
+      "required": [
+        "id",
+        "station_m",
+        "count",
+        "angular_offset_rad",
+        "geometry",
+        "actuation"
+      ],
+      "title": "FinSet",
+      "type": "object"
+    },
+    "FlightProperties": {
+      "additionalProperties": false,
+      "properties": {
+        "motor": {
+          "$ref": "#/$defs/MotorInstallation"
+        },
+        "aerodynamics": {
+          "$ref": "#/$defs/AerodynamicCalibration"
+        },
+        "actuators": {
+          "items": {
+            "$ref": "#/$defs/ActuatorDynamics"
+          },
+          "title": "Actuators",
+          "type": "array"
+        }
+      },
+      "required": [
+        "motor"
+      ],
+      "title": "FlightProperties",
+      "type": "object"
+    },
+    "FlightRocket": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-z][a-z0-9_\\-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "body": {
+          "$ref": "#/$defs/Body"
+        },
+        "nose": {
+          "$ref": "#/$defs/Nose"
+        },
+        "dry_mass_properties": {
+          "$ref": "#/$defs/DryMassProperties"
+        },
+        "fin_sets": {
+          "items": {
+            "$ref": "#/$defs/FinSet"
+          },
+          "title": "Fin Sets",
+          "type": "array"
+        },
+        "flight": {
+          "$ref": "#/$defs/FlightProperties"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "body",
+        "nose",
+        "dry_mass_properties",
+        "flight"
+      ],
+      "title": "FlightRocket",
+      "type": "object"
+    },
+    "MotorInstallation": {
+      "additionalProperties": false,
+      "properties": {
+        "data_file": {
+          "minLength": 1,
+          "title": "Data File",
+          "type": "string"
+        },
+        "data_format": {
+          "const": "csv",
+          "default": "csv",
+          "enum": [
+            "csv"
+          ],
+          "title": "Data Format",
+          "type": "string"
+        },
+        "nozzle_station_m": {
+          "minimum": 0.0,
+          "title": "Nozzle Station M",
+          "type": "number"
+        }
+      },
+      "required": [
+        "data_file",
+        "nozzle_station_m"
+      ],
+      "title": "MotorInstallation",
+      "type": "object"
+    },
+    "Nose": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "half_ellipsoid",
+          "enum": [
+            "half_ellipsoid"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "length_m": {
+          "exclusiveMinimum": 0.0,
+          "title": "Length M",
+          "type": "number"
+        },
+        "aerodynamics": {
+          "$ref": "#/$defs/ComponentAerodynamics"
+        }
+      },
+      "required": [
+        "type",
+        "length_m"
+      ],
+      "title": "Nose",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 2,
+      "enum": [
+        2
+      ],
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "rocket": {
+      "$ref": "#/$defs/FlightRocket"
+    }
+  },
+  "required": [
+    "schema_version",
+    "rocket"
+  ],
+  "title": "FlightRocketDefinition",
+  "type": "object"
+}

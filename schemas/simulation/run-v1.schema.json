@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Simulation Run Definition v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "rocket", "motor", "simulation"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "rocket": {"type": "string", "minLength": 1},
+    "motor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["definition"],
+      "properties": {
+        "definition": {"type": "string", "minLength": 1},
+        "nozzle_station_m": {"type": "number", "minimum": 0, "default": 0}
+      }
+    },
+    "aerodynamics": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "powered_drag_multiplier": {"type": "number", "exclusiveMinimum": 0, "default": 1},
+        "coast_drag_multiplier": {"type": "number", "exclusiveMinimum": 0, "default": 1},
+        "control_effectiveness_multiplier": {"type": "number", "exclusiveMinimum": 0, "default": 1}
+      }
+    },
+    "actuators": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["fin_set_id", "maximum_rate_radps"],
+        "properties": {
+          "fin_set_id": {"type": "string", "pattern": "^[a-z][a-z0-9_\\-]*$"},
+          "maximum_rate_radps": {"type": "number", "exclusiveMinimum": 0}
+        }
+      }
+    },
+    "simulation": {"type": "object"}
+  }
+}

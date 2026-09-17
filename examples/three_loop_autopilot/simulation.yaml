@@ -1,0 +1,31 @@
+schema_version: 1
+rocket: rocket.yaml
+motor:
+  definition: ../../data/motors/cti/pro38_1g_141_g78/motor.yaml
+  nozzle_station_m: 0.0
+aerodynamics:
+  powered_drag_multiplier: 1.0
+  coast_drag_multiplier: 1.0
+  control_effectiveness_multiplier: 1.0
+actuators:
+  - fin_set_id: rear
+    maximum_rate_radps: 10.471975511966
+simulation:
+  atmosphere:
+    model: isa1976
+    wind_world_mps: [0.0, 0.0, 0.0]
+  launch_rail:
+    position_world_m: [0.0, 0.0, 0.0]
+    length_m: 2.0
+    inclination_rad: 1.5707963267948966
+    heading_rad: 0.0
+  integration:
+    time_step_s: 0.001
+    controller_rate_hz: 100.0
+  aerodynamic_limits:
+    maximum_mach: 0.7
+    maximum_angle_of_attack_rad: 0.17453292519943295
+    diagnostic_continuation: false
+  stop_condition: apogee
+  maximum_duration_s: 8.0
+  random_seed: 1

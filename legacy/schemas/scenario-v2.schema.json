@@ -1,0 +1,236 @@
+{
+  "$defs": {
+    "AerodynamicLimits": {
+      "additionalProperties": false,
+      "properties": {
+        "maximum_mach": {
+          "default": 0.7,
+          "exclusiveMinimum": 0.0,
+          "maximum": 0.7,
+          "title": "Maximum Mach",
+          "type": "number"
+        },
+        "maximum_angle_of_attack_rad": {
+          "default": 0.17453292519943295,
+          "exclusiveMinimum": 0.0,
+          "maximum": 0.17453292519943295,
+          "title": "Maximum Angle Of Attack Rad",
+          "type": "number"
+        },
+        "diagnostic_continuation": {
+          "default": false,
+          "title": "Diagnostic Continuation",
+          "type": "boolean"
+        }
+      },
+      "title": "AerodynamicLimits",
+      "type": "object"
+    },
+    "Atmosphere": {
+      "additionalProperties": false,
+      "properties": {
+        "model": {
+          "const": "isa1976",
+          "default": "isa1976",
+          "enum": [
+            "isa1976"
+          ],
+          "title": "Model",
+          "type": "string"
+        },
+        "wind_world_mps": {
+          "default": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Wind World Mps",
+          "type": "array"
+        }
+      },
+      "title": "Atmosphere",
+      "type": "object"
+    },
+    "FinCommand": {
+      "additionalProperties": false,
+      "properties": {
+        "time_s": {
+          "minimum": 0.0,
+          "title": "Time S",
+          "type": "number"
+        },
+        "fin_set_id": {
+          "pattern": "^[a-z][a-z0-9_\\-]*$",
+          "title": "Fin Set Id",
+          "type": "string"
+        },
+        "deflection_rad": {
+          "title": "Deflection Rad",
+          "type": "number"
+        }
+      },
+      "required": [
+        "time_s",
+        "fin_set_id",
+        "deflection_rad"
+      ],
+      "title": "FinCommand",
+      "type": "object"
+    },
+    "IntegrationSettings": {
+      "additionalProperties": false,
+      "properties": {
+        "time_step_s": {
+          "default": 0.001,
+          "exclusiveMinimum": 0.0,
+          "maximum": 0.02,
+          "title": "Time Step S",
+          "type": "number"
+        },
+        "controller_rate_hz": {
+          "default": 100.0,
+          "exclusiveMinimum": 0.0,
+          "title": "Controller Rate Hz",
+          "type": "number"
+        }
+      },
+      "title": "IntegrationSettings",
+      "type": "object"
+    },
+    "LaunchRail": {
+      "additionalProperties": false,
+      "properties": {
+        "position_world_m": {
+          "default": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Position World M",
+          "type": "array"
+        },
+        "length_m": {
+          "exclusiveMinimum": 0.0,
+          "title": "Length M",
+          "type": "number"
+        },
+        "inclination_rad": {
+          "default": 1.5707963267948966,
+          "maximum": 1.5707963267948966,
+          "minimum": 0.0,
+          "title": "Inclination Rad",
+          "type": "number"
+        },
+        "heading_rad": {
+          "default": 0.0,
+          "maximum": 3.141592653589793,
+          "minimum": -3.141592653589793,
+          "title": "Heading Rad",
+          "type": "number"
+        }
+      },
+      "required": [
+        "length_m"
+      ],
+      "title": "LaunchRail",
+      "type": "object"
+    },
+    "Scenario": {
+      "additionalProperties": false,
+      "properties": {
+        "atmosphere": {
+          "$ref": "#/$defs/Atmosphere"
+        },
+        "launch_rail": {
+          "$ref": "#/$defs/LaunchRail"
+        },
+        "integration": {
+          "$ref": "#/$defs/IntegrationSettings"
+        },
+        "fin_commands": {
+          "items": {
+            "$ref": "#/$defs/FinCommand"
+          },
+          "title": "Fin Commands",
+          "type": "array"
+        },
+        "aerodynamic_limits": {
+          "$ref": "#/$defs/AerodynamicLimits"
+        },
+        "stop_condition": {
+          "const": "apogee",
+          "default": "apogee",
+          "enum": [
+            "apogee"
+          ],
+          "title": "Stop Condition",
+          "type": "string"
+        },
+        "maximum_duration_s": {
+          "default": 30.0,
+          "exclusiveMinimum": 0.0,
+          "maximum": 300.0,
+          "title": "Maximum Duration S",
+          "type": "number"
+        },
+        "random_seed": {
+          "default": 1,
+          "minimum": 0,
+          "title": "Random Seed",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "launch_rail"
+      ],
+      "title": "Scenario",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 2,
+      "enum": [
+        2
+      ],
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "simulation": {
+      "$ref": "#/$defs/Scenario"
+    }
+  },
+  "required": [
+    "schema_version",
+    "simulation"
+  ],
+  "title": "SimulationScenario",
+  "type": "object"
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Motor Performance Definition v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "name",
+    "manufacturer",
+    "thrust_curve_file",
+    "loaded_mass_kg",
+    "propellant_mass_kg",
+    "propellant_cg_station_m",
+    "propellant_radius_m",
+    "propellant_length_m"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "id": {"type": "string", "minLength": 1},
+    "name": {"type": "string", "minLength": 1},
+    "manufacturer": {"type": "string", "minLength": 1},
+    "thrust_curve_file": {"type": "string", "minLength": 1},
+    "loaded_mass_kg": {"type": "number", "exclusiveMinimum": 0},
+    "propellant_mass_kg": {"type": "number", "exclusiveMinimum": 0},
+    "propellant_cg_station_m": {"type": "number", "minimum": 0},
+    "propellant_radius_m": {"type": "number", "exclusiveMinimum": 0},
+    "propellant_length_m": {"type": "number", "exclusiveMinimum": 0},
+    "source_url": {"type": ["string", "null"]}
+  }
+}

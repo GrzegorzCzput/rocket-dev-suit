@@ -1,0 +1,166 @@
+{
+  "$defs": {
+    "AerodynamicEnvironment": {
+      "additionalProperties": false,
+      "properties": {
+        "air_density_kg_m3": {
+          "default": 1.225,
+          "exclusiveMinimum": 0.0,
+          "title": "Air Density Kg M3",
+          "type": "number"
+        },
+        "wind_world_mps": {
+          "default": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Wind World Mps",
+          "type": "array"
+        },
+        "initial_position_world_m": {
+          "default": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Initial Position World M",
+          "type": "array"
+        },
+        "initial_rpy_world_rad": {
+          "default": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Initial Rpy World Rad",
+          "type": "array"
+        },
+        "initial_linear_velocity_world_mps": {
+          "default": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Initial Linear Velocity World Mps",
+          "type": "array"
+        },
+        "initial_angular_velocity_world_radps": {
+          "default": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Initial Angular Velocity World Radps",
+          "type": "array"
+        },
+        "maximum_mach": {
+          "default": 0.8,
+          "exclusiveMinimum": 0.0,
+          "maximum": 1.0,
+          "title": "Maximum Mach",
+          "type": "number"
+        },
+        "speed_of_sound_mps": {
+          "default": 340.0,
+          "exclusiveMinimum": 0.0,
+          "title": "Speed Of Sound Mps",
+          "type": "number"
+        },
+        "maximum_angle_of_attack_rad": {
+          "default": 0.17453292519943295,
+          "exclusiveMinimum": 0.0,
+          "maximum": 0.5235987755982988,
+          "title": "Maximum Angle Of Attack Rad",
+          "type": "number"
+        }
+      },
+      "title": "AerodynamicEnvironment",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "enum": [
+        1
+      ],
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "simulation": {
+      "$ref": "#/$defs/AerodynamicEnvironment"
+    }
+  },
+  "required": [
+    "schema_version"
+  ],
+  "title": "SimulationDefinition",
+  "type": "object"
+}
